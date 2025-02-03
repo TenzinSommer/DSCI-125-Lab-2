@@ -20,11 +20,11 @@ df['est_stop_distance'] = round((df['reaction_time'] * df['speed']) + df['speed'
 #         distance_compare.append('longer')
 
 # df['distance_compare'] = distance_compare
-def compare(est, max):
-	if est == max: return 'equal'
-	if est > max: return 'shorter'
+def compare(est, actual):
+	if est == actual: return 'equal'
+	if est > actual: return 'shorter'
 	return 'longer'
 
-df["distance_compare"] = df[["est_stop_distance", "stop_distance"]].apply(lambda x: compare(x[0], x[1]), axis=1)
+df["distance_compare"] = df[["est_stop_distance", "stop_distance"]].apply(compare)
 
 print(df)
