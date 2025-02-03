@@ -27,7 +27,7 @@ for beg in range(0, len(df), 10):
     newDF.loc[i] = [tempDF['stop_distance'].max(), tempDF['speed'].max(), dryCounter]
 
 # typecasts newDF to correct results
-newDF = newDF.astype({'max_stop_distance': float, 'max_speed': int, 'dry_count': int})
+newDF = newDF.astype({'max_stop_distance': float, 'max_speed': float, 'dry_count': int})
 print(newDF)
 
 # writes newDF to csv file
