@@ -6,7 +6,7 @@ import pandas as pd
 # put them in one row in new csv file
 
 # read csv and turn into dataframe
-df = pd.read_csv("car_stopping_distance.csv")
+df = pd.read_csv("car_stopping_distance_t2.csv")
 
 # removes any row containing an empty space in any column
 df = df.dropna()
@@ -15,6 +15,7 @@ df = df.dropna()
 newDF = pd.DataFrame({'max_stop_distance': [], 'max_speed': [], 'dry_count': []})
 
 # checks every 10 rows and adds results to new DF 
+i = 0
 for beg in range(0, len(df), 10):
     tempDF = df.iloc[beg:beg + 10][['stop_distance', 'speed', 'road_type']]
     
@@ -22,11 +23,11 @@ for beg in range(0, len(df), 10):
     for condition in tempDF['road_type']:
         if condition == 'dry':
             dryCounter += 1
-
-    newDF.loc[len(newDF)] = [tempDF['stop_distance'].max(), tempDF['speed'].max(), dryCounter]
+    i += 1
+    newDF.loc[i] = [tempDF['stop_distance'].max(), tempDF['speed'].max(), dryCounter]
 
 # typecasts newDF to correct results
-newDF = newDF.astype({'max_stop_distance': float, 'max_speed': float, 'dry_count': int})
+newDF = newDF.astype({'max_stop_distance': float, 'max_speed': int, 'dry_count': int})
 print(newDF)
 
 # writes newDF to csv file
