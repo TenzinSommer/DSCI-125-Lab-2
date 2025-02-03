@@ -12,7 +12,7 @@ df = pd.read_csv("car_stopping_distance.csv")
 df = df.dropna()
 
 # makes a new DF that holds the relevant values
-newDF = pd.DataFrame({'stop_distance': [], 'speed': [], 'road_type': []})
+newDF = pd.DataFrame({'max_stop_distance': [], 'max_speed': [], 'dry_count': []})
 
 # checks every 10 rows and adds results to new DF 
 for beg in range(0, len(df), 10):
@@ -26,7 +26,7 @@ for beg in range(0, len(df), 10):
     newDF.loc[len(newDF)] = [tempDF['stop_distance'].max(), tempDF['speed'].max(), dryCounter]
 
 # typecasts newDF to correct results
-newDF = newDF.astype({'stop_distance': float, 'speed': float, 'road_type': int})
+newDF = newDF.astype({'max_stop_distance': float, 'max_speed': float, 'dry_count': int})
 print(newDF)
 
 # writes newDF to csv file
