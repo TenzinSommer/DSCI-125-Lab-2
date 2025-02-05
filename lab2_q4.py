@@ -25,6 +25,10 @@ def compare(est, actual):
 	if est > actual: return 'shorter'
 	return 'longer'
 
-df["distance_compare"] = df[["est_stop_distance", "stop_distance"]].apply(compare)
+df["distance_compare"] = (df[["est_stop_distance", "stop_distance"]].apply(lambda x: compare(x["est_stop_distance"], x["stop_distance"]), axis=1))
 
-print(df)
+# corr = pd.read_csv('q4_answer.csv')
+
+# print(df == corr)
+
+df.to_csv(path_or_buf="./q4_answer.csv", index= False)
